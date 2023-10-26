@@ -2,3 +2,4 @@ Cilj projektnog zadatka je realizacija kompajlera za programski jezik Mikrojavu.
 omogućava prevodjenje sintaksno i semantički ispravnih Mikrojava programa u Mikrojava bajtkod
 koji se izvršava na virtuelnoj mašini za Mikrojavu. Sintaksno i semantički ispravni Mikrojava
 programi su definisani specifikacijom [MJ].
+Tekst celog projekta se nalazi u dokumentu "pp1_2022_2023_jan".
