@@ -1,0 +1,64 @@
+INFO  14:13:17,006 - Pretraga na 22(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,006 - Pretraga na 23(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,007 - Pretraga na 24(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,007 - Pretraga na 24(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,007 - Pretraga na 24(jedan), nadjeno Con jedan: int, 1, 0
+INFO  14:13:17,007 - Pretraga na 25(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,007 - Pretraga na 25(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,007 - Pretraga na 25(pet), nadjeno Con pet: int, 5, 0
+INFO  14:13:17,007 - Pretraga na 26(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,007 - Pretraga na 27(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,007 - Pretraga na 29(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,007 - Pretraga na 30(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,007 - Pretraga na 30(nula), nadjeno Con nula: int, 0, 0
+INFO  14:13:17,007 - Pretraga na 30(jedan), nadjeno Con jedan: int, 1, 0
+INFO  14:13:17,008 - Pretraga na 31(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 32(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 32(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 32(jedan), nadjeno Con jedan: int, 1, 0
+INFO  14:13:17,008 - Pretraga na 32(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 32(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 33(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,008 - Pretraga na 33(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 33(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 34(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,008 - Pretraga na 35(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 37(a), nadjeno Var a: int, 2, 0
+INFO  14:13:17,008 - Pretraga na 37(b), nadjeno Var b: int, 3, 0
+INFO  14:13:17,008 - Pretraga na 37(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 38(a), nadjeno Var a: int, 2, 0
+INFO  14:13:17,008 - Pretraga na 39(b), nadjeno Var b: int, 3, 0
+INFO  14:13:17,008 - Pretraga na 41(a), nadjeno Var a: int, 2, 0
+INFO  14:13:17,008 - Pretraga na 41(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 42(a), nadjeno Var a: int, 2, 0
+INFO  14:13:17,008 - Pretraga na 44(niz2), nadjeno Var niz2: Arr of int, 1, 0
+INFO  14:13:17,008 - Pretraga na 45(niz2), nadjeno Var niz2: Arr of int, 1, 0
+INFO  14:13:17,008 - Pretraga na 45(niz2), nadjeno Var niz2: Arr of int, 1, 0
+INFO  14:13:17,008 - Pretraga na 45(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 45(nula), nadjeno Con nula: int, 0, 0
+INFO  14:13:17,008 - Pretraga na 45(niz), nadjeno Var niz: Arr of int, 0, 0
+INFO  14:13:17,008 - Pretraga na 47(niz2), nadjeno Var niz2: Arr of int, 1, 0
+INFO  14:13:17,008 - Pretraga na 48(niz2), nadjeno Var niz2: Arr of int, 1, 0
+INFO  14:13:17,008 - Pretraga na 52(nizch), nadjeno Var nizch: Arr of char, 4, 0
+INFO  14:13:17,008 - Pretraga na 53(nizch), nadjeno Var nizch: Arr of char, 4, 0
+INFO  14:13:17,008 - Pretraga na 54(nizch), nadjeno Var nizch: Arr of char, 4, 0
+INFO  14:13:17,009 - Pretraga na 54(jedan), nadjeno Con jedan: int, 1, 0
+INFO  14:13:17,009 - Pretraga na 55(nizch), nadjeno Var nizch: Arr of char, 4, 0
+INFO  14:13:17,009 - Pretraga na 55(pet), nadjeno Con pet: int, 5, 0
+INFO  14:13:17,009 - Pretraga na 56(nizch), nadjeno Var nizch: Arr of char, 4, 0
+INFO  14:13:17,009 - Pretraga na 57(nizch), nadjeno Var nizch: Arr of char, 4, 0
+INFO  14:13:17,009 - Pretraga na 57(jedan), nadjeno Con jedan: int, 1, 0
+INFO  14:13:17,009 - Pretraga na 58(c), nadjeno Var c: char, 2, 1
+INFO  14:13:17,009 - Pretraga na 61(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,009 - Pretraga na 62(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,009 - Pretraga na 62(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,009 - Pretraga na 62(pet), nadjeno Con pet: int, 5, 0
+INFO  14:13:17,009 - Pretraga na 62(a), nadjeno Var a: int, 2, 0
+INFO  14:13:17,009 - Pretraga na 62(jedan), nadjeno Con jedan: int, 1, 0
+INFO  14:13:17,009 - Pretraga na 62(bodovi), nadjeno Var bodovi: int, 0, 1
+INFO  14:13:17,009 - Pretraga na 63(bodovi), nadjeno Var bodovi: int, 0, 1
+===========================================
+4     global variables
+3     global constants
+3     global arrays
+3     local variables in main

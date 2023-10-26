@@ -1,0 +1,243 @@
+
+
+package rs.ac.bg.etf.pp1;
+
+import java_cup.runtime.*;
+import org.apache.log4j.*;
+import rs.ac.bg.etf.pp1.ast.*;
+
+parser code {:
+
+	Logger log = Logger.getLogger(getClass());
+   
+   
+    // slede redefinisani metodi za prijavu gresaka radi izmene teksta poruke
+     
+    public void report_fatal_error(String message, Object info) throws java.lang.Exception {
+      done_parsing();
+      report_error(message, info);
+    }
+  
+    public void syntax_error(Symbol cur_token) {
+        report_error("\nSintaksna greska", cur_token);
+    }
+  
+    public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
+        report_fatal_error("Fatalna greska, parsiranje se ne moze nastaviti", cur_token);
+    }
+
+    public void report_error(String message, Object info) {
+    	StringBuilder msg = new StringBuilder(message); 
+    	if (info instanceof Symbol)
+            msg.append (" na liniji ").append(((Symbol)info).left);
+        log.error(msg.toString());
+    }
+
+
+:}
+
+scan with {:
+	Symbol s = this.getScanner().next_token();
+	if (s != null && s.value != null) 
+		log.info(s.toString() + " " + s.value.toString());
+	return s;
+:}
+  
+terminal PROGRAM, LBRACE, RBRACE, CONST, ASSIGN, COMMA, EQUAL, LPAREN, RPAREN, SEMI;
+terminal READ, PRINT, INC, DEC, LSQUARE, RSQUARE, NEW, PLUS, MINUS, MUL, DIV, PER, VOID;
+terminal Integer NUMCONST;
+terminal String IDENT;
+terminal Character CHARCONST;
+terminal String BOOLCONST;
+terminal BREAK, DO, WHILE, COLON, EXTENDS, ELSE, IF, AND, LESS, ENUM, LAMBDA, GREEQ, THIS, GRE, LESSEQ, FOREACH, NOTEQUAL, CLASS, RETURN, CONTINUE, OR;
+
+nonterminal DeclList, VarDeclList, DeclVarOnlyList, VarDecl, ConstDeclList, ConstDecl;
+nonterminal MethodDeclList, FormPars, FormalParamList, FormalParamDecl, StatementList, Statement;
+nonterminal DesignatorStatement;
+nonterminal Addop, Mulop, NumConstOp, MinusOp, ErrorPart, VarDeclListPart, VarD, VarDTwo, DLsquare;
+
+nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, MethodeDecl, MethodTypeName, Designator, MethodDeclFP, IdentExprList, IdentExprListLsquare, DesignatorOptList, DesignatorOpt;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Expr, Factor, Term, ConstVal;
+
+
+Program ::= (Program) PROGRAM ProgName:p DeclList LBRACE MethodDeclList RBRACE;
+
+ProgName ::= (ProgName) IDENT:progName;
+
+DeclList ::= (VarDecls) DeclList VarDecl
+         |
+         (ConstDecls) DeclList ConstDecl
+         |
+         (NoDec) /* epsilon */
+         ;
+
+VarDeclList ::= (AnotherVarDecl) VarDeclList VarDeclListPart
+			|
+			(NoAnotherVarDecl)/* epsilon */
+			;
+			
+VarDeclListPart ::= (VarDeclListPartC) COMMA VarDTwo
+				|
+				error:l
+	  			{: parser.report_error("Izvrsen oporavak za globalnu promenljivu do , u liniji "+lleft,null); :}
+	  			;
+
+VarDTwo ::= (VarDTwoC) IDENT:varName
+        |
+        (VarArrayDTwoC)IDENT:varName LSQUARE RSQUARE
+        ;
+			  
+DeclVarOnlyList ::= (VarOnlyDeclarations) DeclVarOnlyList VarDecl
+			    |
+				(NoVarOnlyDeclarations)/* epsilon */
+				;
+
+VarDecl ::= (VarDeclC) VarD VarDeclList SEMI
+		|
+		error SEMI:l
+	  	{: parser.report_error("Izvrsen oporavak za globalnu promenljivu do ; u liniji "+lleft,null); :}
+	  	;
+
+VarD ::= (VarDC) Type:varType IDENT:varName
+    |
+    (VarDArrayC) Type:varType IDENT:varName LSQUARE RSQUARE
+    ;
+
+ConstDeclList ::= (AnotherConstDecl) ConstDeclList COMMA IDENT:constName EQUAL ConstVal
+			  |
+			  (NoAnotherConstDecl) /* epsilon */
+			  ;
+				  
+ConstVal ::= (NumVal) NUMCONST:n
+		 |	 
+		 (CharVal) CHARCONST:c
+		 |	 
+		 (BoolVal) BOOLCONST:b
+		 ;
+
+ConstDecl ::=  (ConstDeclC) CONST Type:constType IDENT:constName ASSIGN ConstVal ConstDeclList SEMI;
+
+Type ::= (TypeC) IDENT:typeName;
+
+MethodDeclList ::= (MethodeDecls) MethodDeclList MethodeDecl
+               |
+               (NoMethodeDecls) /* epsilon */
+               ;
+
+MethodeDecl ::= (MethodeDeclC) MethodDeclFP StatementList RBRACE;
+
+MethodDeclFP ::= (MethodDeclFPC) MethodTypeName:metName LPAREN FormPars RPAREN DeclVarOnlyList LBRACE;
+
+MethodTypeName ::= (MethodType) Type:retType IDENT:metName
+               |
+               (MethodVoidType) VOID IDENT:metName
+			   ;
+
+FormPars ::= (FormParams) FormalParamDecl FormalParamList
+		 | 
+		 (NoFormParam)/* epsilon */
+		 ;
+			 
+FormalParamList ::= (FormalParamDecls) FormalParamList COMMA FormalParamDecl
+			    |
+				(NoFormalParamDecl)/* epsilon */
+				;
+
+FormalParamDecl ::= (FormalParamDeclC) Type IDENT
+				|
+				(FormalParamArrayDeclC) Type IDENT LSQUARE RSQUARE
+				;
+
+StatementList ::= (Statements) StatementList Statement
+			  |
+			  (NoStmt) /* epsilon */
+			  ;		 
+
+Statement ::= (Assignment) DesignatorStatement SEMI
+		  |
+		  (ReadStm) READ LPAREN Designator:d RPAREN SEMI
+		  |
+		  (PrintStm) PRINT LPAREN Expr NumConstOp RPAREN SEMI
+		  |
+		  error SEMI:l
+	  	  {: parser.report_error("Izvrsen oporavak za dodelu vrednosti do ; u liniji "+lleft,null); :}
+		  ;  
+
+NumConstOp ::= (NumConstOpC) COMMA NUMCONST
+             |
+             (NoNumConstOp) /* epsilon */
+             ;
+
+DesignatorStatement ::= (DesignatorStatementExpr) Designator:d ASSIGN Expr:e
+                    |
+                    (DesignatorStatementInc) Designator:d INC
+                    |
+                    (DesignatorStatementDec) Designator:d DEC
+                    |
+                    (DesignatorStatementAssign) DLsquare DesignatorOpt DesignatorOptList RSQUARE ASSIGN Designator
+                    ;
+                    
+DLsquare ::= (DLsquareC) LSQUARE;
+			 
+DesignatorOpt ::= (DesignatorOptC) Designator
+			  |
+			  (NoDesignatorOpt)	/* epsilon */
+			  ;	 
+			  
+DesignatorOptList ::= (DesignatorOptListC) DesignatorOptList COMMA DesignatorOpt:d
+                  |
+			      (NoDesignatorOptList)	/* epsilon */
+			      ;          
+            
+Expr ::= (ExprC) Expr:e Addop Term:t
+	 |
+	 (SingleExprc) MinusOp Term:t
+	 ;
+
+//AddopTermList
+
+MinusOp ::= (MinusOptional) MINUS
+		|
+		(NoMinusOptional)/* epsilon */
+		;
+            
+Term ::= (TermC) Term:t Mulop Factor:f
+	 |
+	 (SingleTermC) Factor:f
+	 ;
+
+//MulopFactorList 
+
+Factor ::= (FactorDes) Designator:d
+       |
+       (FactorNumConst) NUMCONST:n
+       |
+       (FactorCharConst) CHARCONST:c
+       |
+       (FactorBoolConst) BOOLCONST:b
+       |
+       (FactorExpr) LPAREN Expr:e RPAREN
+       |
+       (FactorNewActPars) NEW Type:t LSQUARE Expr:e RSQUARE
+       ;        
+
+Designator ::= (DesignatorExpr) IdentExprList;
+
+IdentExprList ::= (DesignatorArrayC) IdentExprListLsquare Expr:e RSQUARE
+              |
+              (DesignatorC) IDENT:name
+              ;
+              
+IdentExprListLsquare ::= (IdentExprListLsquare) IdentExprList LSQUARE;
+       
+Addop ::= (AddopPlus) PLUS
+      |
+      (AddopMinus) MINUS
+      ;
+      
+Mulop ::= (MulopMul) MUL
+      |
+      (MulopDiv) DIV
+      |
+      (MulopPer) PER
+      ;
